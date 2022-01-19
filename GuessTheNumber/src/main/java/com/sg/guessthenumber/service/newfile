@@ -1,0 +1,12 @@
+        String answer = gameDao.getGameById(round.getGameId()).getAnswer();
+        String guess = round.getGuess();
+        String result = figureSolution(guess, answer);
+        round.setResult(result);
+        
+        if (guess.equals(answer)) {
+            Game game = getGameById(round.getGameId());
+            game.setFinished(true);
+            gameDao.updateGame(game);
+        }
+        
+        return roundDao.addRound(round);
